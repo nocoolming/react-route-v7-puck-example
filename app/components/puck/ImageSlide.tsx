@@ -15,9 +15,11 @@ export type ImageSlideProps = {
     link?: string;
   }>;
   autoplay?: boolean;
-  autoplayDelay?: number;
+  autoplayDelay?: 1000 | 2000 | 3000 | 4000 | 5000 | 10000;
   showNavigation?: boolean;
   showPagination?: boolean;
+  height?: 200 | 300 | 400 | 500 | 600;
+  borderRadius?: "none" | "sm" | "md" | "lg" | "xl";
 };
 
 export const ImageSlide: ComponentConfig<ImageSlideProps> = {
@@ -37,7 +39,17 @@ export const ImageSlide: ComponentConfig<ImageSlideProps> = {
         { label: "关闭", value: false },
       ]
     },
-    autoplayDelay: { type: "number" },
+    autoplayDelay: {
+      type: "select",
+      options: [
+        { label: "1秒", value: 1000 },
+        { label: "2秒", value: 2000 },
+        { label: "3秒", value: 3000 },
+        { label: "4秒", value: 4000 },
+        { label: "5秒", value: 5000 },
+        { label: "10秒", value: 10000 },
+      ],
+    },
     showNavigation: {
       type: "radio", options: [
         { label: "显示", value: true },
@@ -49,6 +61,26 @@ export const ImageSlide: ComponentConfig<ImageSlideProps> = {
         { label: "显示", value: true },
         { label: "隐藏", value: false },
       ]
+    },
+    height: {
+      type: "select",
+      options: [
+        { label: "小 (200px)", value: 200 },
+        { label: "中小 (300px)", value: 300 },
+        { label: "中 (400px)", value: 400 },
+        { label: "大 (500px)", value: 500 },
+        { label: "超大 (600px)", value: 600 },
+      ],
+    },
+    borderRadius: {
+      type: "select",
+      options: [
+        { label: "无圆角", value: "none" },
+        { label: "小圆角", value: "sm" },
+        { label: "中圆角", value: "md" },
+        { label: "大圆角", value: "lg" },
+        { label: "超大圆角", value: "xl" },
+      ],
     },
   },
   defaultProps: {
@@ -64,18 +96,42 @@ export const ImageSlide: ComponentConfig<ImageSlideProps> = {
     autoplayDelay: 3000,
     showNavigation: true,
     showPagination: true,
+    height: 400,
+    borderRadius: "none",
   },
-  render: ({ images, autoplay, autoplayDelay, showNavigation, showPagination }) => {
+  render: ({ images, autoplay, autoplayDelay, showNavigation, showPagination, height, borderRadius }) => {
     const modules = [];
     if (showNavigation) modules.push(Navigation);
     if (showPagination) modules.push(Pagination);
     if (autoplay) modules.push(Autoplay);
 
     // 使用 key 强制重新渲染 Swiper 当配置改变时
-    const swiperKey = `${autoplay}-${autoplayDelay}-${showNavigation}-${showPagination}`;
+    const swiperKey = `${autoplay}-${autoplayDelay}-${showNavigation}-${showPagination}-${height}-${borderRadius}`;
+
+    // 高度类名映射
+    const heightClasses = {
+      200: "h-48",
+      300: "h-72", 
+      400: "h-96",
+      500: "h-[500px]",
+      600: "h-[600px]",
+    };
+
+    // 圆角类名映射
+    const radiusClasses = {
+      none: "",
+      sm: "rounded-sm",
+      md: "rounded-md", 
+      lg: "rounded-lg",
+      xl: "rounded-xl",
+    };
+
+    const heightClass = heightClasses[height as keyof typeof heightClasses] || "h-96";
+    const radiusClass = radiusClasses[borderRadius as keyof typeof radiusClasses] || "";
+    const swiperClasses = `overflow-hidden ${radiusClass}`.trim();
 
     return (
-      <div style={{ margin: "16px 0" }}>
+      <div className="my-4">
         <Swiper
           key={swiperKey}
           modules={modules}
@@ -88,36 +144,24 @@ export const ImageSlide: ComponentConfig<ImageSlideProps> = {
             disableOnInteraction: false,
           } : false}
           loop={true}
-          style={{
-            overflow: "hidden",
-          }}
+          className={swiperClasses}
         >
           {images.map((image) => (
             <SwiperSlide key={image.id}>
-              <div style={{ position: "relative" }}>
+              <div className="relative">
                 {image.link ? (
-                  <a href={image.link} style={{ display: "block" }}>
+                  <a href={image.link} className="block">
                     <img
                       src={image.src}
                       alt={image.alt}
-                      style={{
-                        width: "100%",
-                        height: "400px",
-                        objectFit: "cover",
-                        display: "block",
-                      }}
+                      className={`w-full ${heightClass} object-cover block`}
                     />
                   </a>
                 ) : (
                   <img
                     src={image.src}
                     alt={image.alt}
-                    style={{
-                      width: "100%",
-                      height: "400px",
-                      objectFit: "cover",
-                      display: "block",
-                    }}
+                    className={`w-full ${heightClass} object-cover block`}
                   />
                 )}
               </div>

@@ -44,7 +44,13 @@ export default function PuckPreview() {
   }, []);
 
   return (
-    <div style={{ maxWidth: "800px", margin: "0 auto", padding: "20px" }}>
+    <div style={{ 
+      maxWidth: "1440px", 
+      margin: "0 auto", 
+      padding: "20px",
+      width: "100%",
+      minWidth: "320px"
+    }}>
       {/* 导航按钮 */}
       <div style={{ marginBottom: "20px", textAlign: "center" }}>
         <a

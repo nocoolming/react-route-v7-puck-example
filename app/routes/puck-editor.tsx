@@ -8,10 +8,18 @@ import "@measured/puck/puck.css";
 const initialData: Data = {
   content: [
     {
-      type: "HeadingBlock",
+      type: "HeroSection",
       props: {
-        id: "heading-1",
+        id: "hero-1",
+        backgroundImage: "https://via.placeholder.com/1200x600/1e40af/ffffff?text=Welcome+Hero",
+        backgroundColor: "#1e40af",
         title: "欢迎使用 Puck Editor",
+        subtitle: "强大的可视化页面编辑器，让创建网页变得简单",
+        buttonText: "开始体验",
+        buttonLink: "#demo",
+        textAlign: "center",
+        overlay: true,
+        overlayOpacity: 0.3,
       },
     },
     {
