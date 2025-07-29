@@ -190,7 +190,6 @@ export const HeroSection: ComponentConfig<HeroSectionProps> = {
         className={finalHeroClasses}
         style={backgroundImage ? { backgroundImage: `url(${backgroundImage})` } : undefined}
       >
-        {overlay && <div className={`absolute inset-0 ${overlayClass}`} />}
         <div className={contentClasses}>
           {title && (
             <h1 className="text-5xl font-bold mb-4 leading-tight">
