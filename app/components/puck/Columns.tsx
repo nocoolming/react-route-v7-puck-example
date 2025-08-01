@@ -3,9 +3,9 @@ import { DropZone } from "@measured/puck";
 
 export type ColumnsProps = {
   columns: number;
-  gap: 2 | 4 | 5 | 6 | 8;
-  verticalAlign: "top" | "center" | "bottom" | "stretch";
-  showBorder: boolean;
+  gap: 'gap-2' | 'gap-4' | 'gap-5' | 'gap-6' | 'gap-8';
+  verticalAlign: "items-top" | "items-center" | "items-bottom" | "items-stretch";
+  borderRadius?: "rounded-none" | "rounded-sm" | "rounded-md" | "rounded-lg" | "rounded-xl" | "rounded-full";
 };
 
 export const Columns: ComponentConfig<ColumnsProps> = {
@@ -21,47 +21,49 @@ export const Columns: ComponentConfig<ColumnsProps> = {
     gap: {
       type: "select",
       options: [
-        { label: "小", value: 2 },
-        { label: "中", value: 4 },
-        { label: "大", value: 5 },
-        { label: "超大", value: 6 },
-        { label: "巨大", value: 8 },
+        { label: "小", value: 'gap-2' },
+        { label: "中", value: 'gap-4' },
+        { label: "大", value: 'gap-5' },
+        { label: "超大", value: 'gap-6' },
+        { label: "巨大", value: 'gap-8' },
       ],
     },
     verticalAlign: {
       type: "select",
       options: [
-        { label: "顶部对齐", value: "top" },
-        { label: "居中对齐", value: "center" },
-        { label: "底部对齐", value: "bottom" },
-        { label: "拉伸对齐", value: "stretch" },
+        { label: "顶部对齐", value: "items-top" },
+        { label: "居中对齐", value: "items-center" },
+        { label: "底部对齐", value: "items-bottom" },
+        { label: "拉伸对齐", value: "items-stretch" },
       ],
     },
-
-    showBorder: {
-      type: "radio",
+    borderRadius: {
+      type: "select",
       options: [
-        { label: "显示", value: true },
-        { label: "隐藏", value: false },
+        { label: "无圆角", value: "rounded-none" },
+        { label: "小圆角", value: "rounded-sm" },
+        { label: "中圆角", value: "rounded-md" },
+        { label: "大圆角", value: "rounded-lg" },
+        { label: "超大圆角", value: "rounded-xl" },
+        { label: "圆形", value: "rounded-full" },
       ],
     },
   },
   defaultProps: {
     columns: 2,
-    gap: 5,
-    verticalAlign: "top",
-    showBorder: false,
+    gap: 'gap-5',
+    verticalAlign: "items-top",
+    borderRadius: 'rounded-sm',
   },
-  render: ({ columns, gap, verticalAlign, showBorder }) => {
-    const containerClasses = `flex flex-col md:flex-row items-${verticalAlign} gap-${gap}`;
-
-    const borderString = showBorder ? "border-2 border-dashed border-gray-300 rounded" : "";
-    const dropZoneClasses = `min-h-[100px] p-2.5 ${borderString}`;
+  render: ({ columns, gap, verticalAlign, borderRadius }) => {
+    const containerClasses = `flex flex-col md:flex-row ${verticalAlign} ${gap} my-3`;
+    
+    const dropZoneClasses = `min-h-[100px] p-2.5 ${borderRadius} border-2 border-gray-300 rounded`;
 
     return (
-      <div className={containerClasses}>
+      <ul className={containerClasses}>
         {Array.from({ length: columns }, (_, index) => (
-          <div key={index} className="flex-1">
+          <li key={index} className="flex-1">
             <DropZone
               zone={`column-${index}`}
               className={`flex justify-center ${dropZoneClasses}`}
@@ -74,9 +76,9 @@ export const Columns: ComponentConfig<ColumnsProps> = {
                 'Divider',
               ]}
             />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     );
   },
 };
