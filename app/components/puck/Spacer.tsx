@@ -33,33 +33,15 @@ export const Spacer: ComponentConfig<SpacerProps> = {
     showInEditor: true,
   },
   render: ({ height, showInEditor }) => {
-    // 基础类名
-    const baseClasses = "w-full";
+    const heightClass = height === 10 ? "h-2.5" : height === 20 ? "h-5" : height === 30 ? "h-8" : 
+                      height === 40 ? "h-10" : height === 50 ? "h-12" : height === 60 ? "h-16" : 
+                      height === 80 ? "h-20" : "h-24";
     
-    // 编辑器显示类名
-    const editorClasses = showInEditor 
-      ? "border border-dashed border-gray-400 bg-gray-50 flex items-center justify-center text-xs text-gray-600"
-      : "";
-
-    const className = `${baseClasses} ${editorClasses}`.trim();
-
-    // 只使用 Tailwind 预设高度值
-    const heightClasses = {
-      10: "h-2.5",
-      20: "h-5",
-      30: "h-8", 
-      40: "h-10",
-      50: "h-12",
-      60: "h-16",
-      80: "h-20",
-      100: "h-24",
-    };
-    
-    const heightClass = heightClasses[height as keyof typeof heightClasses] || "h-10";
-    const finalClassName = `${className} ${heightClass}`;
+    const editorString = showInEditor ? "border border-dashed border-gray-400 bg-gray-50 flex items-center justify-center text-xs text-gray-600" : "";
+    const className = `w-full ${heightClass} ${editorString}`;
 
     return (
-      <div className={finalClassName}>
+      <div className={className}>
         {showInEditor && `间距 ${height}px`}
       </div>
     );

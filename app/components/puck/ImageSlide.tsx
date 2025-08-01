@@ -108,26 +108,9 @@ export const ImageSlide: ComponentConfig<ImageSlideProps> = {
     // 使用 key 强制重新渲染 Swiper 当配置改变时
     const swiperKey = `${autoplay}-${autoplayDelay}-${showNavigation}-${showPagination}-${height}-${borderRadius}`;
 
-    // 高度类名映射
-    const heightClasses = {
-      200: "h-48",
-      300: "h-72", 
-      400: "h-96",
-      500: "h-[500px]",
-      600: "h-[600px]",
-    };
-
-    // 圆角类名映射
-    const radiusClasses = {
-      none: "",
-      sm: "rounded-sm",
-      md: "rounded-md", 
-      lg: "rounded-lg",
-      xl: "rounded-xl",
-    };
-
-    const heightClass = heightClasses[height as keyof typeof heightClasses] || "h-96";
-    const radiusClass = radiusClasses[borderRadius as keyof typeof radiusClasses] || "";
+    const heightClass = height === 200 ? "h-48" : height === 300 ? "h-72" : height === 400 ? "h-96" : 
+                       height === 500 ? "h-[500px]" : "h-[600px]";
+    const radiusClass = borderRadius === "none" ? "" : `rounded-${borderRadius}`;
     const swiperClasses = `overflow-hidden ${radiusClass}`.trim();
 
     return (

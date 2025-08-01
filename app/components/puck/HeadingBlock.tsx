@@ -69,38 +69,8 @@ export const HeadingBlock: ComponentConfig<HeadingBlockProps> = {
       6: "text-base",
     };
 
-    // 文本对齐类名映射
-    const alignClasses = {
-      left: "text-left",
-      center: "text-center",
-      right: "text-right",
-    };
-
-    // 颜色类名映射
-    const colorClasses = {
-      black: "text-black",
-      gray: "text-gray-600",
-      blue: "text-blue-600",
-      red: "text-red-600",
-      green: "text-green-600",
-      purple: "text-purple-600",
-    };
-
-    // 字重类名映射
-    const weightClasses = {
-      normal: "font-normal",
-      medium: "font-medium",
-      semibold: "font-semibold",
-      bold: "font-bold",
-    };
-
-    const className = [
-      sizeClasses[level],
-      alignClasses[textAlign],
-      colorClasses[color],
-      weightClasses[fontWeight],
-      "my-2"
-    ].join(" ");
+    const colorClass = color === "black" ? "text-black" : color === "gray" ? "text-gray-600" : `text-${color}-600`;
+    const className = `${sizeClasses[level]} text-${textAlign} ${colorClass} font-${fontWeight} my-2`;
 
     const headingProps = { className };
 

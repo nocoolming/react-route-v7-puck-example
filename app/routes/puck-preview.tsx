@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Render } from "@measured/puck";
 import type { Data } from "@measured/puck";
 import config from "../puck.config";
+import '../app.css'
 
 // 默认数据
 const defaultData: Data = {

@@ -6,7 +6,7 @@ export type ImageBlockProps = {
   borderRadius: "none" | "sm" | "md" | "lg" | "xl" | "full";
   showBorder: boolean;
   borderStyle: "solid" | "dashed" | "dotted";
-  borderWidth: "1" | "2" | "4" | "8";
+  borderWidth: "border" | "border-2" | "border-4" | "border-8";
   borderColor: "gray" | "blue" | "red" | "green" | "yellow" | "purple";
   width: "auto" | "full" | "1/2" | "1/3" | "1/4";
   height: "auto" | "32" | "48" | "64" | "80" | "96";
@@ -46,10 +46,10 @@ export const ImageBlock: ComponentConfig<ImageBlockProps> = {
     borderWidth: {
       type: "select",
       options: [
-        { label: "细 (1px)", value: "1" },
-        { label: "中 (2px)", value: "2" },
-        { label: "粗 (4px)", value: "4" },
-        { label: "超粗 (8px)", value: "8" },
+        { label: "细 ", value: "border" },
+        { label: "中 ", value: "border-2" },
+        { label: "粗", value: "border-4" },
+        { label: "超粗 ", value: "border-8" },
       ],
     },
     borderColor: {
@@ -100,97 +100,25 @@ export const ImageBlock: ComponentConfig<ImageBlockProps> = {
     borderRadius: "none",
     showBorder: false,
     borderStyle: "solid",
-    borderWidth: "1",
+    borderWidth: "border",
     borderColor: "gray",
     width: "full",
     height: "auto",
     objectFit: "contain",
   },
   render: ({ src, alt, borderRadius, showBorder, borderStyle, borderWidth, borderColor, width, height, objectFit }) => {
-    // 圆角类名映射
-    const radiusClasses = {
-      none: "",
-      sm: "rounded-sm",
-      md: "rounded-md",
-      lg: "rounded-lg",
-      xl: "rounded-xl",
-      full: "rounded-full",
-    };
-
-    // 边框宽度类名映射
-    const borderWidthClasses = {
-      "1": "border",
-      "2": "border-2", 
-      "4": "border-4",
-      "8": "border-8",
-    };
-
-    // 边框样式类名映射
-    const borderStyleClasses = {
-      solid: "",
-      dashed: "border-dashed",
-      dotted: "border-dotted",
-    };
-
-    // 边框颜色类名映射
-    const borderColorClasses = {
-      gray: "border-gray-300",
-      blue: "border-blue-500",
-      red: "border-red-500", 
-      green: "border-green-500",
-      yellow: "border-yellow-500",
-      purple: "border-purple-500",
-    };
-
-    // 宽度类名映射
-    const widthClasses = {
-      auto: "w-auto",
-      full: "w-full",
-      "1/2": "w-1/2",
-      "1/3": "w-1/3", 
-      "1/4": "w-1/4",
-    };
-
-    // 高度类名映射
-    const heightClasses = {
-      auto: "h-auto",
-      "32": "h-32",
-      "48": "h-48",
-      "64": "h-64",
-      "80": "h-80",
-      "96": "h-96",
-    };
-
-    // 对象适应类名映射
-    const objectFitClasses = {
-      contain: "object-contain",
-      cover: "object-cover",
-      fill: "object-fill",
-      none: "object-none",
-    };
-
-    // 构建类名
-    const baseClasses = "flex-1 min-w-0 self-start";
-    const radiusClass = radiusClasses[borderRadius];
-    const widthClass = widthClasses[width as keyof typeof widthClasses] || "w-full";
-    const heightClass = heightClasses[height as keyof typeof heightClasses] || "h-auto";
-    const objectFitClass = objectFitClasses[objectFit as keyof typeof objectFitClasses] || "object-contain";
+    const radiusClass = borderRadius === "none" ? "" : `rounded-${borderRadius}`;
+    const styleClass = borderStyle === "solid" ? "" : `border-${borderStyle}`;
+    const colorClass = `border-${borderColor}-${borderColor === "gray" ? "300" : "500"}`;
     
-    let borderClasses = "";
-    if (showBorder) {
-      const borderWidthClass = borderWidthClasses[borderWidth];
-      const styleClass = borderStyleClasses[borderStyle];
-      const colorClass = borderColorClasses[borderColor];
-      borderClasses = `${borderWidthClass} ${styleClass} ${colorClass}`.trim();
-    }
-    
-    const finalClassName = `${baseClasses} ${widthClass} ${heightClass} ${objectFitClass} ${radiusClass} ${borderClasses}`.trim();
+    const borderString = showBorder ? `${borderWidth} ${styleClass} ${colorClass}` : "";
+    const className = `flex-1 min-w-0 self-start w-${width} h-${height} object-${objectFit} ${radiusClass} ${borderString}`;
 
     return (
       <img
         src={src}
         alt={alt}
-        className={finalClassName}
+        className={className}
       />
     );
   },

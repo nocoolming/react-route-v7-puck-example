@@ -4,7 +4,7 @@ export type ButtonProps = {
   text: string;
   href?: string;
   variant: "primary" | "secondary" | "outline" | "ghost";
-  size: "sm" | "md" | "lg";
+  size: "px-3 py-1.5 text-sm" | "px-4 py-2 text-base" | "px-6 py-3 text-lg";
   fullWidth?: boolean;
   target?: "_self" | "_blank";
   borderRadius?: "none" | "sm" | "md" | "lg" | "xl" | "full";
@@ -26,9 +26,9 @@ export const Button: ComponentConfig<ButtonProps> = {
     size: {
       type: "select",
       options: [
-        { label: "小", value: "sm" },
-        { label: "中", value: "md" },
-        { label: "大", value: "lg" },
+        { label: "小", value: "px-3 py-1.5 text-sm" },
+        { label: "中", value: "px-4 py-2 text-base" },
+        { label: "大", value: "px-6 py-3 text-lg" },
       ],
     },
     fullWidth: {
@@ -61,14 +61,14 @@ export const Button: ComponentConfig<ButtonProps> = {
     text: "点击按钮",
     href: "#",
     variant: "primary",
-    size: "md",
+    size: "px-4 py-2 text-base",
     fullWidth: false,
     target: "_self",
     borderRadius: "md",
   },
   render: ({ text, href, variant, size, fullWidth, target, borderRadius }) => {
     const baseClasses = "inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2";
-    
+
     const variantClasses = {
       primary: "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500",
       secondary: "bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500",
@@ -76,31 +76,9 @@ export const Button: ComponentConfig<ButtonProps> = {
       ghost: "text-blue-600 hover:bg-blue-50 focus:ring-blue-500",
     };
 
-    const sizeClasses = {
-      sm: "px-3 py-1.5 text-sm",
-      md: "px-4 py-2 text-base",
-      lg: "px-6 py-3 text-lg",
-    };
-
-    const radiusClasses = {
-      none: "",
-      sm: "rounded-sm",
-      md: "rounded-md",
-      lg: "rounded-lg", 
-      xl: "rounded-xl",
-      full: "rounded-full",
-    };
-
     const widthClass = fullWidth ? "w-full" : "";
-    const radiusClass = radiusClasses[borderRadius as keyof typeof radiusClasses] || "rounded-md";
-
-    const className = [
-      baseClasses,
-      variantClasses[variant],
-      sizeClasses[size],
-      radiusClass,
-      widthClass,
-    ].filter(Boolean).join(" ");
+    const radiusClass = borderRadius === "none" ? "" : `rounded-${borderRadius}`;
+    const className = `${baseClasses} ${variantClasses[variant]} ${size} ${radiusClass} ${widthClass}`.trim();
 
     return (
       <a

@@ -227,25 +227,15 @@ export const Container: ComponentConfig<ContainerProps> = {
         }
       }
 
-      // Gap 类名映射
-      const gapClasses = {
-        8: "gap-2",
-        16: "gap-4", 
-        24: "gap-6",
-        32: "gap-8",
-      };
-      classes.push(gapClasses[gap as keyof typeof gapClasses] || "gap-4");
+      // Gap 类名
+      const gapClass = gap === 8 ? "gap-2" : gap === 16 ? "gap-4" : gap === 24 ? "gap-6" : "gap-8";
+      classes.push(gapClass);
 
-      // Padding 类名映射
-      const paddingClasses = {
-        0: "",
-        10: "p-2.5",
-        20: "p-5", 
-        30: "p-7.5",
-        40: "p-10",
-      };
-      const paddingClass = paddingClasses[padding as keyof typeof paddingClasses];
-      if (paddingClass) classes.push(paddingClass);
+      // Padding 类名
+      if (padding > 0) {
+        const paddingClass = padding === 10 ? "p-2.5" : padding === 20 ? "p-5" : padding === 30 ? "p-7.5" : "p-10";
+        classes.push(paddingClass);
+      }
 
       // 响应式支持 - 只在 flex 布局时应用
       if (layoutType === "flex" && responsive) {

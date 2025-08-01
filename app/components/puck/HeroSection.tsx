@@ -120,32 +120,9 @@ export const HeroSection: ComponentConfig<HeroSectionProps> = {
     // Hero 容器类名
     const heroClasses = "relative flex items-center justify-center bg-cover bg-center bg-no-repeat";
 
-    // 文本对齐类名
-    const textAlignClasses = {
-      left: "text-left",
-      center: "text-center",
-      right: "text-right",
-    };
-
-    // 内边距类名映射
-    const paddingClasses = {
-      sm: "px-4",
-      md: "px-6",
-      lg: "px-8",
-      xl: "px-12",
-    };
-
-    // 外边距类名映射
-    const marginClasses = {
-      none: "",
-      sm: "my-2",
-      md: "my-4",
-      lg: "my-8",
-    };
-
-    const paddingClass = paddingClasses[padding as keyof typeof paddingClasses] || "px-8";
-    const marginClass = marginClasses[margin as keyof typeof marginClasses] || "my-4";
-    const contentClasses = `relative z-10 text-white max-w-3xl ${paddingClass} ${textAlignClasses[textAlign || "center"]}`;
+    const paddingClass = `px-${padding}`;
+    const marginClass = margin === "none" ? "" : `my-${margin}`;
+    const contentClasses = `relative z-10 text-white max-w-3xl ${paddingClass} text-${textAlign || "center"}`;
 
     // 高度类名映射
     const heightClasses = {
@@ -185,11 +162,16 @@ export const HeroSection: ComponentConfig<HeroSectionProps> = {
     // 始终应用背景色，背景图片会覆盖在上面
     const finalHeroClasses = `${heroClasses} ${heightClass} ${bgColorClass} ${marginClass}`;
 
+    const divProps = backgroundImage 
+      ? { 
+          className: finalHeroClasses,
+          style: { backgroundImage: `url(${backgroundImage})` }
+        }
+      : { className: finalHeroClasses };
+
     return (
-      <div
-        className={finalHeroClasses}
-        style={backgroundImage ? { backgroundImage: `url(${backgroundImage})` } : undefined}
-      >
+      <div {...divProps}>
+        {overlay && <div className={`absolute inset-0 ${overlayClass}`} />}
         <div className={contentClasses}>
           {title && (
             <h1 className="text-5xl font-bold mb-4 leading-tight">
