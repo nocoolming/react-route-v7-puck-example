@@ -46,13 +46,9 @@ export const Divider: ComponentConfig<DividerProps> = {
     console.log(`color: ${color}, select: ${style}`)
 
     return (
-      <div>
-        <div className={`my-5 ${style}  ${color} `} >
-          dsagfasdf
+        <div className={`my-5 ${style}  ${color} ${thickness}`} >
         </div>
 
-        <div className="border-t border-red-900"></div>
-      </div>
 
     );
   },
