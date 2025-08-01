@@ -2,17 +2,15 @@ import type { ComponentConfig } from "@measured/puck";
 
 export type HeroSectionProps = {
   backgroundImage?: string;
-  backgroundColor?: "blue" | "purple" | "green" | "red" | "orange" | "pink" | "cyan" | "gray" | "black";
-  height?: 300 | 400 | 500 | 600;
+  backgroundColor?: "bg-blue-800" | "bg-purple-800" | "bg-green-800" | "bg-red-800" | "bg-orange-800" | "bg-pink-800" | "bg-cyan-800" | "bg-gray-800" | "bg-black" | "bg-indigo-800" | "bg-yellow-800" | "bg-teal-800";
+  height?: "h-72" | "h-96" | "h-[500px]" | "h-[600px]";
   title?: string;
   subtitle?: string;
   buttonText?: string;
   buttonLink?: string;
-  textAlign?: "left" | "center" | "right";
-  overlay?: boolean;
-  overlayOpacity?: 20 | 30 | 40 | 50 | 60;
-  padding?: "sm" | "md" | "lg" | "xl";
-  margin?: "none" | "sm" | "md" | "lg";
+  textAlign?: "text-left" | "text-center" | "text-right";
+  padding?: "px-4" | "px-6" | "px-8" | "px-12";
+  margin?: "my-0" | "my-2" | "my-4" | "my-8";
 };
 
 export const HeroSection: ComponentConfig<HeroSectionProps> = {
@@ -21,24 +19,27 @@ export const HeroSection: ComponentConfig<HeroSectionProps> = {
     backgroundColor: {
       type: "select",
       options: [
-        { label: "深蓝色", value: "blue" },
-        { label: "紫色", value: "purple" },
-        { label: "绿色", value: "green" },
-        { label: "红色", value: "red" },
-        { label: "橙色", value: "orange" },
-        { label: "粉色", value: "pink" },
-        { label: "青色", value: "cyan" },
-        { label: "灰色", value: "gray" },
-        { label: "黑色", value: "black" },
+        { label: "深蓝色", value: "bg-blue-800" },
+        { label: "紫色", value: "bg-purple-800" },
+        { label: "绿色", value: "bg-green-800" },
+        { label: "红色", value: "bg-red-800" },
+        { label: "橙色", value: "bg-orange-800" },
+        { label: "粉色", value: "bg-pink-800" },
+        { label: "青色", value: "bg-cyan-800" },
+        { label: "灰色", value: "bg-gray-800" },
+        { label: "黑色", value: "bg-black" },
+        { label: "靛蓝色", value: "bg-indigo-800" },
+        { label: "黄色", value: "bg-yellow-800" },
+        { label: "蓝绿色", value: "bg-teal-800" },
       ],
     },
     height: {
       type: "select",
       options: [
-        { label: "小 (300px)", value: 300 },
-        { label: "中 (400px)", value: 400 },
-        { label: "大 (500px)", value: 500 },
-        { label: "超大 (600px)", value: 600 },
+        { label: "小", value: "h-72" },
+        { label: "中", value: "h-96" },
+        { label: "大", value: "h-[500px]" },
+        { label: "超大", value: "h-[600px]" },
       ],
     },
     title: { type: "text" },
@@ -48,60 +49,41 @@ export const HeroSection: ComponentConfig<HeroSectionProps> = {
     textAlign: {
       type: "select",
       options: [
-        { label: "左对齐", value: "left" },
-        { label: "居中", value: "center" },
-        { label: "右对齐", value: "right" },
-      ],
-    },
-    overlay: {
-      type: "radio",
-      options: [
-        { label: "开启", value: true },
-        { label: "关闭", value: false },
-      ],
-    },
-    overlayOpacity: {
-      type: "select",
-      options: [
-        { label: "20%", value: 20 },
-        { label: "30%", value: 30 },
-        { label: "40%", value: 40 },
-        { label: "50%", value: 50 },
-        { label: "60%", value: 60 },
+        { label: "left", value: "text-left" },
+        { label: "center", value: "text-center" },
+        { label: "right", value: "text-right" },
       ],
     },
     padding: {
       type: "select",
       options: [
-        { label: "小", value: "sm" },
-        { label: "中", value: "md" },
-        { label: "大", value: "lg" },
-        { label: "超大", value: "xl" },
+        { label: "小", value: "px-4" },
+        { label: "中", value: "px-6" },
+        { label: "大", value: "px-8" },
+        { label: "超大", value: "px-12" },
       ],
     },
     margin: {
       type: "select",
       options: [
-        { label: "无", value: "none" },
-        { label: "小", value: "sm" },
-        { label: "中", value: "md" },
-        { label: "大", value: "lg" },
+        { label: "无", value: "my-0" },
+        { label: "小", value: "my-2" },
+        { label: "中", value: "my-4" },
+        { label: "大", value: "my-8" },
       ],
     },
   },
   defaultProps: {
     backgroundImage: "https://via.placeholder.com/1200x600/1e40af/ffffff?text=Hero+Background",
-    backgroundColor: "blue",
-    height: 500,
+    backgroundColor: "bg-blue-800",
+    height: "h-[500px]",
     title: "欢迎来到我们的网站",
     subtitle: "这里是副标题，可以描述您的产品或服务的核心价值",
     buttonText: "立即开始",
     buttonLink: "#",
-    textAlign: "center",
-    overlay: true,
-    overlayOpacity: 40,
-    padding: "lg",
-    margin: "md",
+    textAlign: "text-center",
+    padding: "px-8",
+    margin: "my-4",
   },
   render: ({
     backgroundImage,
@@ -112,67 +94,26 @@ export const HeroSection: ComponentConfig<HeroSectionProps> = {
     buttonText,
     buttonLink,
     textAlign,
-    overlay,
-    overlayOpacity,
     padding,
     margin
   }) => {
-    // Hero 容器类名
-    const heroClasses = "relative flex items-center justify-center bg-cover bg-center bg-no-repeat";
+    const baseHeroClasses = "relative flex items-center justify-center bg-cover bg-center bg-no-repeat";
+    const heroClassName = `${baseHeroClasses} ${height} ${backgroundColor} ${margin}`.trim();
 
-    const paddingClass = `px-${padding}`;
-    const marginClass = margin === "none" ? "" : `my-${margin}`;
-    const contentClasses = `relative z-10 text-white max-w-3xl ${paddingClass} text-${textAlign || "center"}`;
+    const baseContentClasses = "relative z-10 text-white max-w-3xl py-6";
+    const contentClassName = `${baseContentClasses} ${padding} ${textAlign}`;
 
-    // 高度类名映射
-    const heightClasses = {
-      300: "h-72",
-      400: "h-96",
-      500: "h-[500px]",
-      600: "h-[600px]",
-    };
-
-    // 背景色类名映射
-    const bgColorClasses = {
-      blue: "bg-blue-800",
-      purple: "bg-purple-800",
-      green: "bg-green-800",
-      red: "bg-red-800",
-      orange: "bg-orange-800",
-      pink: "bg-pink-800",
-      cyan: "bg-cyan-800",
-      gray: "bg-gray-800",
-      black: "bg-black",
-    };
-
-    // 遮罩透明度类名映射
-    const overlayOpacityClasses = {
-      20: "bg-opacity-20",
-      30: "bg-opacity-30",
-      40: "bg-opacity-40",
-      50: "bg-opacity-50",
-      60: "bg-opacity-60",
-    };
-
-    const heightClass = heightClasses[height as keyof typeof heightClasses] || "h-96";
-    const bgColorClass = bgColorClasses[backgroundColor as keyof typeof bgColorClasses] || "bg-blue-800";
-    const overlayOpacityClass = overlayOpacityClasses[overlayOpacity as keyof typeof overlayOpacityClasses] || "bg-opacity-40";
-    const overlayClass = overlay ? `bg-black ${overlayOpacityClass}` : "";
-
-    // 始终应用背景色，背景图片会覆盖在上面
-    const finalHeroClasses = `${heroClasses} ${heightClass} ${bgColorClass} ${marginClass}`;
-
-    const divProps = backgroundImage 
-      ? { 
-          className: finalHeroClasses,
-          style: { backgroundImage: `url(${backgroundImage})` }
-        }
-      : { className: finalHeroClasses };
+    const divProps = backgroundImage
+      ? {
+        className: heroClassName,
+        style: { backgroundImage: `url(${backgroundImage})` }
+      }
+      : { className: heroClassName };
 
     return (
       <div {...divProps}>
-        {overlay && <div className={`absolute inset-0 ${overlayClass}`} />}
-        <div className={contentClasses}>
+
+        <div className={contentClassName}>
           {title && (
             <h1 className="text-5xl font-bold mb-4 leading-tight">
               {title}

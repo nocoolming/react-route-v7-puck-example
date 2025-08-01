@@ -3,9 +3,10 @@ import type { ComponentConfig } from "@measured/puck";
 export type HeadingBlockProps = {
   title: string;
   level: 1 | 2 | 3 | 4 | 5 | 6;
-  textAlign: "left" | "center" | "right";
-  color: "black" | "gray" | "blue" | "red" | "green" | "purple";
-  fontWeight: "normal" | "medium" | "semibold" | "bold";
+  textAlign: "text-left" | "text-center" | "text-right";
+  color: "text-black" | "text-gray-600" | "text-blue-600" | "text-red-600" | "text-green-600" | "text-purple-600" | "text-pink-600" | "text-indigo-600" | "text-orange-600" | "text-teal-600" | "text-yellow-600";
+  fontWeight: "font-normal" | "font-medium" | "font-semibold" | "font-bold";
+  size: "text-4xl" | "text-3xl" | "text-2xl" | "text-xl" | "text-lg" | "text-base";
 };
 
 export const HeadingBlock: ComponentConfig<HeadingBlockProps> = {
@@ -25,52 +26,58 @@ export const HeadingBlock: ComponentConfig<HeadingBlockProps> = {
     textAlign: {
       type: "select",
       options: [
-        { label: "左对齐", value: "left" },
-        { label: "居中", value: "center" },
-        { label: "右对齐", value: "right" },
+        { label: "left", value: "text-left" },
+        { label: "center", value: "text-center" },
+        { label: "right", value: "text-right" },
       ],
     },
     color: {
       type: "select",
       options: [
-        { label: "黑色", value: "black" },
-        { label: "灰色", value: "gray" },
-        { label: "蓝色", value: "blue" },
-        { label: "红色", value: "red" },
-        { label: "绿色", value: "green" },
-        { label: "紫色", value: "purple" },
+        { label: "黑色", value: "text-black" },
+        { label: "灰色", value: "text-gray-600" },
+        { label: "蓝色", value: "text-blue-600" },
+        { label: "红色", value: "text-red-600" },
+        { label: "绿色", value: "text-green-600" },
+        { label: "紫色", value: "text-purple-600" },
+        { label: "粉色", value: "text-pink-600" },
+        { label: "靛蓝", value: "text-indigo-600" },
+        { label: "橙色", value: "text-orange-600" },
+        { label: "青色", value: "text-teal-600" },
+        { label: "黄色", value: "text-yellow-600" },
       ],
     },
     fontWeight: {
       type: "select",
       options: [
-        { label: "正常", value: "normal" },
-        { label: "中等", value: "medium" },
-        { label: "半粗", value: "semibold" },
-        { label: "粗体", value: "bold" },
+        { label: "正常", value: "font-normal" },
+        { label: "中等", value: "font-medium" },
+        { label: "半粗", value: "font-semibold" },
+        { label: "粗体", value: "font-bold" },
+      ],
+    },
+    size: {
+      type: "select",
+      options: [
+        { label: "超大", value: "text-4xl" },
+        { label: "大", value: "text-3xl" },
+        { label: "中大", value: "text-2xl" },
+        { label: "中", value: "text-xl" },
+        { label: "小", value: "text-lg" },
+        { label: "超小", value: "text-base" },
       ],
     },
   },
   defaultProps: {
     title: "标题",
     level: 1,
-    textAlign: "left",
-    color: "black",
-    fontWeight: "bold",
+    textAlign: "text-left",
+    color: "text-black",
+    fontWeight: "font-bold",
+    size: "text-4xl",
   },
-  render: ({ title, level, textAlign, color, fontWeight }) => {
-    // 文本大小类名映射
-    const sizeClasses = {
-      1: "text-4xl",
-      2: "text-3xl",
-      3: "text-2xl",
-      4: "text-xl",
-      5: "text-lg",
-      6: "text-base",
-    };
-
-    const colorClass = color === "black" ? "text-black" : color === "gray" ? "text-gray-600" : `text-${color}-600`;
-    const className = `${sizeClasses[level]} text-${textAlign} ${colorClass} font-${fontWeight} my-2`;
+  render: ({ title, level, textAlign, color, fontWeight, size }) => {
+    const className = `my-2 ${size} ${textAlign} ${color} ${fontWeight}`.trim();
 
     const headingProps = { className };
 

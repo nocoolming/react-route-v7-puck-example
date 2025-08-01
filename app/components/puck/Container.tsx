@@ -3,18 +3,17 @@ import { DropZone } from "@measured/puck";
 
 export type ContainerProps = {
   layoutType: "flex" | "grid";
-  flexDirection?: "row" | "column";
-  justifyContent?: "start" | "center" | "end" | "between" | "around";
-  alignItems?: "start" | "center" | "end" | "stretch";
-  gridRows?: 1 | 2 | 3 | 4 | 5 | 6;
-  gridColumns?: 1 | 2 | 3 | 4 | 5 | 6;
-  gap?: 8 | 16 | 24 | 32;
-  padding?: 0 | 10 | 20 | 30 | 40;
-  backgroundColor?: "" | "gray-50" | "white" | "blue-50" | "green-50" | "red-50";
-  maxWidth?: "none" | "sm" | "md" | "lg" | "xl" | "full";
-  centerContainer?: boolean;
-  responsive?: boolean;
-  showBorder?: boolean;
+  flexDirection?: "flex-row" | "flex-col";
+  justifyContent?: "justify-start" | "justify-center" | "justify-end" | "justify-between";
+  alignItems?: "items-start" | "items-center" | "items-end" | "items-stretch";
+  gridRows?: "grid-rows-1" | "grid-rows-2" | "grid-rows-3" | "grid-rows-4" | "grid-rows-5" | "grid-rows-6";
+  gridColumns?: "grid-cols-1" | "grid-cols-2" | "grid-cols-3" | "grid-cols-4" | "grid-cols-5" | "grid-cols-6";
+  gap?: "gap-2" | "gap-4" | "gap-6" | "gap-8";
+  padding?: "p-0" | "p-2.5" | "p-5" | "p-7.5" | "p-10";
+  backgroundColor?: "bg-transparent" | "bg-gray-50" | "bg-white" | "bg-blue-50" | "bg-green-50" | "bg-red-50" | "bg-yellow-50" | "bg-purple-50" | "bg-pink-50" | "bg-indigo-50" | "bg-orange-50" | "bg-teal-50";
+  maxWidth?: "max-w-none" | "max-w-sm" | "max-w-md" | "max-w-4xl" | "max-w-6xl" | "max-w-full";
+  containerAlign?: "mx-0" | "mx-auto" | "ml-auto" | "mr-auto";
+  borderRadius?: "rounded-none" | "rounded-sm" | "rounded-md" | "rounded-lg" | "rounded-xl" | "rounded-full";
 };
 
 export const Container: ComponentConfig<ContainerProps> = {
@@ -29,244 +28,156 @@ export const Container: ComponentConfig<ContainerProps> = {
     flexDirection: {
       type: "select",
       options: [
-        { label: "水平排列", value: "row" },
-        { label: "垂直排列", value: "column" },
+        { label: "水平排列", value: "flex-row" },
+        { label: "垂直排列", value: "flex-col" },
       ],
     },
     justifyContent: {
       type: "select",
       options: [
-        { label: "左对齐", value: "start" },
-        { label: "居中", value: "center" },
-        { label: "右对齐", value: "end" },
-        { label: "两端对齐", value: "between" },
-        { label: "环绕对齐", value: "around" },
+        { label: "left", value: "justify-start" },
+        { label: "center", value: "justify-center" },
+        { label: "right", value: "justify-end" },
+        { label: "between", value: "justify-between" },
       ],
     },
     alignItems: {
       type: "select",
       options: [
-        { label: "顶部对齐", value: "start" },
-        { label: "居中对齐", value: "center" },
-        { label: "底部对齐", value: "end" },
-        { label: "拉伸对齐", value: "stretch" },
+        { label: "顶部对齐", value: "items-start" },
+        { label: "居中对齐", value: "items-center" },
+        { label: "底部对齐", value: "items-end" },
+        { label: "拉伸对齐", value: "items-stretch" },
       ],
     },
     maxWidth: {
       type: "select",
       options: [
-        { label: "无限制", value: "none" },
-        { label: "小 (640px)", value: "sm" },
-        { label: "中 (768px)", value: "md" },
-        { label: "大 (1024px)", value: "lg" },
-        { label: "超大 (1280px)", value: "xl" },
-        { label: "全宽", value: "full" },
+        { label: "无限制", value: "max-w-none" },
+        { label: "小", value: "max-w-sm" },
+        { label: "中", value: "max-w-md" },
+        { label: "大", value: "max-w-4xl" },
+        { label: "超大", value: "max-w-6xl" },
+        { label: "全宽", value: "max-w-full" },
       ],
     },
-    centerContainer: {
-      type: "radio",
+    containerAlign: {
+      type: "select",
       options: [
-        { label: "是", value: true },
-        { label: "否", value: false },
+        { label: "left", value: "mx-0" },
+        { label: "center", value: "mx-auto" },
+        { label: "right", value: "ml-auto" },
       ],
     },
-    responsive: {
-      type: "radio",
+    borderRadius: {
+      type: "select",
       options: [
-        { label: "开启", value: true },
-        { label: "关闭", value: false },
-      ],
-    },
-    showBorder: {
-      type: "radio",
-      options: [
-        { label: "显示", value: true },
-        { label: "隐藏", value: false },
+        { label: "无圆角", value: "rounded-none" },
+        { label: "小圆角", value: "rounded-sm" },
+        { label: "中圆角", value: "rounded-md" },
+        { label: "大圆角", value: "rounded-lg" },
+        { label: "超大圆角", value: "rounded-xl" },
+        { label: "圆形", value: "rounded-full" },
       ],
     },
     gridRows: {
       type: "select",
       options: [
-        { label: "1行", value: 1 },
-        { label: "2行", value: 2 },
-        { label: "3行", value: 3 },
-        { label: "4行", value: 4 },
-        { label: "5行", value: 5 },
-        { label: "6行", value: 6 },
+        { label: "1行", value: "grid-rows-1" },
+        { label: "2行", value: "grid-rows-2" },
+        { label: "3行", value: "grid-rows-3" },
+        { label: "4行", value: "grid-rows-4" },
+        { label: "5行", value: "grid-rows-5" },
+        { label: "6行", value: "grid-rows-6" },
       ],
     },
     gridColumns: {
       type: "select",
       options: [
-        { label: "1列", value: 1 },
-        { label: "2列", value: 2 },
-        { label: "3列", value: 3 },
-        { label: "4列", value: 4 },
-        { label: "5列", value: 5 },
-        { label: "6列", value: 6 },
+        { label: "1列", value: "grid-cols-1" },
+        { label: "2列", value: "grid-cols-2" },
+        { label: "3列", value: "grid-cols-3" },
+        { label: "4列", value: "grid-cols-4" },
+        { label: "5列", value: "grid-cols-5" },
+        { label: "6列", value: "grid-cols-6" },
       ],
     },
     gap: {
       type: "select",
       options: [
-        { label: "小 (8px)", value: 8 },
-        { label: "中 (16px)", value: 16 },
-        { label: "大 (24px)", value: 24 },
-        { label: "超大 (32px)", value: 32 },
+        { label: "小", value: "gap-2" },
+        { label: "中", value: "gap-4" },
+        { label: "大", value: "gap-6" },
+        { label: "超大", value: "gap-8" },
       ],
     },
     padding: {
       type: "select",
       options: [
-        { label: "无", value: 0 },
-        { label: "小 (10px)", value: 10 },
-        { label: "中 (20px)", value: 20 },
-        { label: "大 (30px)", value: 30 },
-        { label: "超大 (40px)", value: 40 },
+        { label: "无", value: "p-0" },
+        { label: "小", value: "p-2.5" },
+        { label: "中", value: "p-5" },
+        { label: "大", value: "p-7.5" },
+        { label: "超大", value: "p-10" },
       ],
     },
     backgroundColor: {
       type: "select",
       options: [
-        { label: "无背景", value: "" },
-        { label: "浅灰", value: "gray-50" },
-        { label: "白色", value: "white" },
-        { label: "浅蓝", value: "blue-50" },
-        { label: "浅绿", value: "green-50" },
-        { label: "浅红", value: "red-50" },
+        { label: "无背景", value: "bg-transparent" },
+        { label: "浅灰", value: "bg-gray-50" },
+        { label: "白色", value: "bg-white" },
+        { label: "浅蓝", value: "bg-blue-50" },
+        { label: "浅绿", value: "bg-green-50" },
+        { label: "浅红", value: "bg-red-50" },
+        { label: "浅黄", value: "bg-yellow-50" },
+        { label: "浅紫", value: "bg-purple-50" },
+        { label: "浅粉", value: "bg-pink-50" },
+        { label: "浅靛蓝", value: "bg-indigo-50" },
+        { label: "浅橙", value: "bg-orange-50" },
+        { label: "浅青", value: "bg-teal-50" },
       ],
     },
   },
   defaultProps: {
     layoutType: "flex",
-    flexDirection: "row",
-    justifyContent: "start",
-    alignItems: "start",
-    gridRows: 2,
-    gridColumns: 2,
-    gap: 16,
-    padding: 20,
-    backgroundColor: "", // 默认透明
-    maxWidth: "none",
-    centerContainer: false,
-    responsive: true,
-    showBorder: false,
+    flexDirection: "flex-row",
+    justifyContent: "justify-start",
+    alignItems: "items-start",
+    gridRows: "grid-rows-2",
+    gridColumns: "grid-cols-2",
+    gap: "gap-4",
+    padding: "p-5",
+    backgroundColor: "bg-transparent",
+    maxWidth: "max-w-none",
+    containerAlign: "mx-0",
+    borderRadius: "rounded-md",
   },
-  render: ({ layoutType, flexDirection, justifyContent, alignItems, gridRows, gridColumns, gap, padding, backgroundColor, maxWidth, centerContainer, responsive, showBorder }) => {
-    // 构建 Tailwind CSS 类名
-    const getClassName = () => {
-      let classes = ["my-4"];
-
-      // 最大宽度控制
-      const maxWidthClasses = {
-        none: "",
-        sm: "max-w-sm",
-        md: "max-w-md",
-        lg: "max-w-4xl",
-        xl: "max-w-6xl",
-        full: "max-w-full",
-      };
-      if (maxWidth && maxWidth !== "none") {
-        classes.push(maxWidthClasses[maxWidth]);
+  render: ({ layoutType, flexDirection, justifyContent, alignItems, gridRows, gridColumns, gap, padding, backgroundColor, maxWidth, containerAlign, borderRadius }) => {
+    let baseClasses = "my-4";
+    
+    // 布局类型
+    if (layoutType === "flex") {
+      baseClasses += " flex flex-wrap";
+      
+      // 默认响应式布局：flex-col md:flex-row
+      if (flexDirection === "flex-row") {
+        baseClasses += " flex-col md:flex-row";
+      } else if (flexDirection) {
+        baseClasses += ` ${flexDirection}`;
       }
+    } else {
+      baseClasses += " grid";
+    }
 
-      // 容器居中
-      if (centerContainer) {
-        classes.push("mx-auto");
-      }
-
-      if (layoutType === "flex") {
-        classes.push("flex");
-        classes.push(flexDirection === "column" ? "flex-col" : "flex-row");
-
-        // Justify content
-        const justifyClasses = {
-          start: "justify-start",
-          center: "justify-center",
-          end: "justify-end",
-          between: "justify-between",
-          around: "justify-around",
-        };
-        classes.push(justifyClasses[justifyContent || "start"]);
-
-        // Align items
-        const alignClasses = {
-          start: "items-start",
-          center: "items-center",
-          end: "items-end",
-          stretch: "items-stretch",
-        };
-        classes.push(alignClasses[alignItems || "start"]);
-
-        classes.push("flex-wrap");
-      } else {
-        classes.push("grid");
-        // Grid 列数配置
-        if (gridColumns) {
-          const gridColClasses = {
-            1: "grid-cols-1",
-            2: "grid-cols-2", 
-            3: "grid-cols-3",
-            4: "grid-cols-4",
-            5: "grid-cols-5",
-            6: "grid-cols-6",
-          };
-          classes.push(gridColClasses[gridColumns as keyof typeof gridColClasses] || "grid-cols-2");
-        }
-        // Grid 行数配置
-        if (gridRows) {
-          const gridRowClasses = {
-            1: "grid-rows-1",
-            2: "grid-rows-2",
-            3: "grid-rows-3", 
-            4: "grid-rows-4",
-            5: "grid-rows-5",
-            6: "grid-rows-6",
-          };
-          classes.push(gridRowClasses[gridRows as keyof typeof gridRowClasses] || "grid-rows-2");
-        }
-      }
-
-      // Gap 类名
-      const gapClass = gap === 8 ? "gap-2" : gap === 16 ? "gap-4" : gap === 24 ? "gap-6" : "gap-8";
-      classes.push(gapClass);
-
-      // Padding 类名
-      if (padding > 0) {
-        const paddingClass = padding === 10 ? "p-2.5" : padding === 20 ? "p-5" : padding === 30 ? "p-7.5" : "p-10";
-        classes.push(paddingClass);
-      }
-
-      // 响应式支持 - 只在 flex 布局时应用
-      if (layoutType === "flex" && responsive) {
-        if (flexDirection === "row") {
-          // 移除之前添加的 flex-row，添加响应式类
-          classes = classes.filter(cls => cls !== "flex-row");
-          classes.push("flex-col", "md:flex-row");
-        }
-        // 如果是 column，在大屏幕上可以保持列布局或改为行布局
-        // 这里保持原有的列布局，用户可以根据需要调整
-      }
-
-      // 背景色类名映射
-      if (backgroundColor) {
-        classes.push(`bg-${backgroundColor}`);
-      }
-
-      // 边框
-      if (showBorder) {
-        classes.push("border border-gray-300");
-      }
-
-      return classes.join(" ");
-    };
+    const className = `${baseClasses} ${maxWidth} ${containerAlign} ${justifyContent} ${alignItems} ${gridRows} ${gridColumns} ${gap} ${padding} ${backgroundColor} ${borderRadius}`.trim();
 
 
 
     return (
       <DropZone
         zone="container-content"
-        className={getClassName()}
+        className={className}
         allow={[
           'HeadingBlock',
           'TextBlock',
