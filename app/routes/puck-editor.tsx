@@ -22,54 +22,7 @@ const initialData: Data = {
         overlayOpacity: 0.3,
       },
     },
-    {
-      type: "TextBlock",
-      props: {
-        id: "text-1",
-        text: "这是一个简单的可视化页面编辑器演示。",
-      },
-    },
-    {
-      type: "ImageSlide",
-      props: {
-        id: "slide-1",
-        images: [
-          {
-            id: "1",
-            src: "https://via.placeholder.com/800x400/007bff/ffffff?text=Welcome+Slide",
-            alt: "欢迎幻灯片",
-            title: "欢迎使用 Puck Editor",
-            link: "#welcome",
-          },
-          {
-            id: "2",
-            src: "https://via.placeholder.com/800x400/28a745/ffffff?text=Features+Slide",
-            alt: "功能介绍",
-            title: "强大的可视化编辑功能",
-            link: "#features",
-          },
-          {
-            id: "3",
-            src: "https://via.placeholder.com/800x400/dc3545/ffffff?text=Demo+Slide",
-            alt: "演示幻灯片",
-            title: "开始创建你的页面",
-            link: "#demo",
-          },
-        ],
-        autoplay: true,
-        autoplayDelay: 3000,
-        showNavigation: true,
-        showPagination: true,
-      },
-    },
-    {
-      type: "ImageBlock",
-      props: {
-        id: "image-1",
-        src: "https://via.placeholder.com/600x300/007bff/ffffff?text=Demo+Image",
-        alt: "演示图片",
-      },
-    },
+ 
   ],
   root: {
     props: {
