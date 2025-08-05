@@ -1,7 +1,7 @@
 import { useState } from "react";
+import config from "../puck.config";
 import { Puck } from "@measured/puck";
 import type { Data } from "@measured/puck";
-import config from "../puck.config";
 import "@measured/puck/puck.css";
 
 // 初始数据
