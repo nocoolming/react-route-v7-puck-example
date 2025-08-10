@@ -11,7 +11,7 @@ const initialData: Data = {
       type: "HeroSection",
       props: {
         id: "hero-1",
-        backgroundImage: "https://via.placeholder.com/1200x600/1e40af/ffffff?text=Welcome+Hero",
+        backgroundImage: "",
         backgroundColor: "#1e40af",
         title: "欢迎使用 Puck Editor",
         subtitle: "强大的可视化页面编辑器，让创建网页变得简单",
@@ -22,7 +22,7 @@ const initialData: Data = {
         overlayOpacity: 0.3,
       },
     },
- 
+
   ],
   root: {
     props: {
@@ -63,7 +63,7 @@ export default function PuckEditor() {
 
   return (
     <div style={{ height: "100vh" }}>
-      <div style={{
+      {/* <div style={{
         position: "absolute",
         top: "10px",
         right: "10px",
@@ -110,12 +110,33 @@ export default function PuckEditor() {
         >
           返回首页
         </a>
-      </div>
+      </div> */}
       <Puck
         config={config}
         data={data}
         onPublish={handleSave}
         onChange={setData}
+        overrides={{
+          headerActions: ({ children }) => {
+            return (
+              <>
+                <button
+                  type='button'
+                  onClick={e => {
+                    e.preventDefault();
+
+                    if (typeof window !== "undefined") {
+                      localStorage.setItem("puck-data", JSON.stringify(data));
+                      alert("页面已保存！");
+                    }
+                  }}>
+                  Save
+                </button>
+              </>
+            )
+          }
+
+        }}
       />
     </div>
   );

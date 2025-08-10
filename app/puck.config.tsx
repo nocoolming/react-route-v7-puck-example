@@ -55,6 +55,10 @@ export const config: Config<Props> = {
     Spacer,
     Divider,
   },
+  categories: {
+    typography:{
+      components: ['TextBlock', 'HeadingBlock']}
+  }
 };
 
 export default config;

@@ -66,8 +66,8 @@ export const ImageSlide: ComponentConfig<ImageSlideProps> = {
     images: [
       {
         id: "1",
-        src: "https://via.placeholder.com/800x400/f8f9fa/6c757d?text=%E7%82%B9%E5%87%BB%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87",
-        alt: "请上传图片",
+        src: "",
+        alt: "Please upload image.",
         link: "",
       },
     ],
