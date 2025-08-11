@@ -3,6 +3,8 @@ import { Render } from "@measured/puck";
 import type { Data } from "@measured/puck";
 import config from "../puck.config";
 import '../app.css'
+import { migrate } from "@measured/puck";
+
 
 // 默认数据
 const defaultData: Data = {
@@ -30,6 +32,8 @@ const defaultData: Data = {
 export default function PuckPreview() {
   const [data, setData] = useState<Data>(defaultData);
 
+  console.log(JSON.stringify(data));
+  // const newData = migrate(data, config);
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedData = localStorage.getItem("puck-data");
