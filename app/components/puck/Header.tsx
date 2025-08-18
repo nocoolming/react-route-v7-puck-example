@@ -28,5 +28,8 @@ export const Header: ComponentConfig<HeaderProps> = {
                 <Content className="flex flex-row gap-3 min-h-48 " />
             </>
         )
-    }
+    },
+    permissions: {
+        delete: false,
+    },
 }
