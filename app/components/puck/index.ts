@@ -8,3 +8,4 @@ export { Button, type ButtonProps } from "./Button";
 export { Spacer, type SpacerProps } from "./Spacer";
 export { Divider, type DividerProps } from "./Divider";
 export { Columns, type ColumnsProps } from "./Columns";
+export { Header, type HeaderProps } from './Header';

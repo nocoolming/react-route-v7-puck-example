@@ -43,7 +43,7 @@ export const Divider: ComponentConfig<DividerProps> = {
     thickness: "h-px",
   },
   render: ({ style, color, thickness }) => {
-    console.log(`color: ${color}, select: ${style}`)
+    // console.log(`color: ${color}, select: ${style}`)
 
     return (
         <div className={`my-5 ${style}  ${color} ${thickness}`} >

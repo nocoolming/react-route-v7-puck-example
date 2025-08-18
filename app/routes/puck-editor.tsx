@@ -63,7 +63,7 @@ export default function PuckEditor() {
 
   return (
     <div style={{ height: "100vh" }}>
-      {/* <div style={{
+      <div style={{
         position: "absolute",
         top: "10px",
         right: "10px",
@@ -110,12 +110,15 @@ export default function PuckEditor() {
         >
           返回首页
         </a>
-      </div> */}
+      </div>
       <Puck
         config={config}
         data={data}
         onPublish={handleSave}
         onChange={setData}
+        permissions={{
+          delete: true,
+        }}
         overrides={{
           headerActions: ({ children }) => {
             return (
